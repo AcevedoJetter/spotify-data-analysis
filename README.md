@@ -1,15 +1,43 @@
 # Spotify Data Analysis
-Repository to get an analysis of your streams since creating your account
+
+Repository to get an analysis of your streams since creating your account.
 
 # Getting the data
-The folder that you have should contain your entire streaming history data for the life of your account. This can be obtained by pressing the `Request data` button in [this website](https://www.spotify.com/us/account/privacy/) if you are logged in to your account. 
 
-After some weeks, you will get an email with the extended streaming history. After downloading it, you will have a zip file called `my_spotify_data.zip` and when opened the directory is `MyData`. 
+The folder that you have should contain your entire streaming history data for the life of your account. This can be obtained by pressing the `Request data` button in [this website](https://www.spotify.com/us/account/privacy/) if you are logged in to your account.
+
+After some weeks, you will get an email with the extended streaming history. After downloading it, you will have a zip file called `my_spotify_data.zip` and when opened the directory is `MyData`.
 
 # MyData
-This directory will contain a pdf file which details the contents of the other files in the directory. The files we care about are the ones with the following two fromats: `Streaming_History_Audio_YEAR1_NUMBER` and `Streaming_History_Audio_YEAR1-YEAR2_NUMBER.json` where `YEAR1` and `YEAR2` are the years in which the data of the json file were streamed and `NUMBER` is the number of the file, making the file with the oldest data be `0` and the most recent data being `len(amount_of_json_files_of_audio) - 1`.
- 
-# main.py 
 
+This directory will contain a pdf file which details the contents of the other files in the directory. The files we care about are the ones that start with `Streaming_History_Audio` and are json files.
 
+The following is from the [Understanding my Data page](https://support.spotify.com/us/article/understanding-my-data/):
 
+A list of items (e.g. songs, videos, and podcasts) listened to or watched during the lifetime of your account, including the following details:
+
+- `ts` - Date and time of when the stream ended in UTC format (Coordinated Universal Time zone).
+- `username` - Your Spotify username.
+- `platform` - Platform used when streaming the track (e.g. Android OS, Google Chromecast).
+- `ms_played` - For how many milliseconds the track was played.
+- `conn_country` - Country code of the country where the stream was played.
+- `ip_addr_decrypted` - IP address used when streaming the track.
+- `user_agent_decrypted` - User agent used when streaming the track (e.g. a browser, like Mozilla Firefox, or Safari).
+- `master_metadata_track_name` - Name of the track.
+- `master_metadata_album_artist_name` - Name of the artist, band or podcast.
+- `master_metadata_album_album_name` - Name of the album of the track.
+- `spotify_track_uri` - A Spotify Track URI, that is identifying the unique music track.
+- `episode_name` - Name of the episode of the podcast.
+- `episode_show_name` - Name of the show of the podcast.
+- `spotify_episode_uri` - A Spotify Episode URI, that is identifying the unique podcast episode.
+- `reason_start` - Reason why the track started (e.g. previous track finished or you picked it from the playlist).
+- `reason_end` - Reason why the track ended (e.g. the track finished playing or you hit the next button).
+- `shuffle` - Whether shuffle mode was used when playing the track.
+- `skipped` - Information whether the user skipped to the next song.
+- `offline` - Information whether the track was played in offline mode.
+- `offline_timestamp` - Timestamp of when offline mode was used, if it was used.
+- `incognito_mode` - Information whether the track was played during a private session.
+
+Look for the "Read Me First - Extended Streaming History" file provided with your data for a detailed description of each technical field that corresponds to the data described above.
+
+# main.py
