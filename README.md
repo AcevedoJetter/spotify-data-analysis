@@ -22,7 +22,7 @@ A list of items (e.g. songs, videos, and podcasts) listened to or watched during
 - `ms_played` - For how many milliseconds the track was played.
 - `conn_country` - Country code of the country where the stream was played.
 - `ip_addr_decrypted` - IP address used when streaming the track.
-- `user_agent_decrypted` - User agent used when streaming the track (e.g. a browser, like Mozilla Firefox, or Safari).
+- `user_agent_decrypted` - User agent used when streaming the track (e.g. a browser).
 - `master_metadata_track_name` - Name of the track.
 - `master_metadata_album_artist_name` - Name of the artist, band or podcast.
 - `master_metadata_album_album_name` - Name of the album of the track.
@@ -67,3 +67,7 @@ Example of the streaming data of one song:
 ```
 
 # main.py
+
+`get_all_data()` - does not take anything as a parameter and returns a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata).
+
+`get_time_playing_songs(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a list with four elements: `[seconds, minutes, hours, days]` rounded up to 2 decimal places.
