@@ -38,15 +38,26 @@ def get_time_playing_songs(data):
     return [seconds.round(2), minutes.round(2), hours.round(2), days.round(2)]
 
 
+def get_different_artist(data):
+    """
+    Parameters:
+        data: pandas DataFrame with columns specified in the README.md
+    
+    Returns:
+        list: list of the different artists the account has played
+    """
+    return list(data["master_metadata_album_artist_name"].unique())
+
+
 def get_amount_different_artist(data):
     """
     Parameters:
         data: pandas DataFrame with columns specified in the README.md
     
     Returns:
-        list: list with all the different artists the account has played
+        list: amount of different artists the account has played
     """
-    return list(data["master_metadata_album_artist_name"].unique())
+    return len(get_amount_different_artist(data))
 
 
 #######################################
