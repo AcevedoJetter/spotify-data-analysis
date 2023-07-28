@@ -72,4 +72,6 @@ Example of the streaming data of one song:
 
 `get_time_playing_songs(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a list with four elements: `[seconds, minutes, hours, days]` rounded up to 2 decimal places.
 
-`get_amount_different_artist(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a list with all the different artists the account has played.
+`get_different_artist(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a list with all the different artists the account has played.
+
+`get_amount_different_artist(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a the amount of different artists the account has played.
