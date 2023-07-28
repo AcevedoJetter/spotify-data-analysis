@@ -40,7 +40,7 @@ A list of items (e.g. songs, videos, and podcasts) listened to or watched during
 
 Example of the streaming data of one song:
 
-```Python
+```json
 {
     "ts" : "YYY-MM-DD 13:30:30",
     "username" : "_________",
@@ -52,17 +52,17 @@ Example of the streaming data of one song:
     "master_metadata_track_name" : "_________",
     "master_metadata_album_artist_name" : "_________",
     "master_metadata_album_album_name" : "_________",
-    "spotify_track_uri :_________",
+    "spotify_track_uri" : "_________",
     "episode_name" : "_________",
     "episode_show_name" : "_________",
-    "spotify_episode_uri :_________",
+    "spotify_episode_uri" : "_________",
     "reason_start" : "_________",
     "reason_end" : "_________",
-    "shuffle" : null/true/false,
-    "skipped" : null/true/false,
-    "offline" : null/true/false,
-    "offline_timestamp" : _________,
-    "incognito_mode" : null/true/false,
+    "shuffle" : null|true|false,
+    "skipped" : null|true|false,
+    "offline" : null|true|false,
+    "offline_timestamp" : "_________",
+    "incognito_mode" : null|true|false,
 }
 ```
 
@@ -75,3 +75,7 @@ Example of the streaming data of one song:
 `get_different_artist(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a list with all the different artists the account has played.
 
 `get_amount_different_artist(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a the amount of different artists the account has played.
+
+# How to run `main.py` in the terminal
+
+First, make sure that the `MyData` directory is in the same directory as `main.py`. After this, you should run `python3 main.py` and it will create a txt file called `analysis.txt` which will contain the analyzed data after running the functions of `main.py` using the data from the `MyData` directory.
