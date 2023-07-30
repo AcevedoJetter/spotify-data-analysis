@@ -70,12 +70,14 @@ Example of the streaming data of one song:
 
 `get_all_data()` - does not take anything as a parameter and returns a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata).
 
+`save_data_csv()` - does not take anything as a parameter and saves all the data from the json files to a big csv file.
+
 `get_time_playing_songs(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a list with four elements: `[seconds, minutes, hours, days]` rounded up to 2 decimal places.
 
 `get_different_artist(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a list with all the different artists the account has played.
 
 `get_amount_different_artist(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a the amount of different artists the account has played.
 
-# How to run `main.py` in the terminal
+# How to run main.py in the terminal
 
 First, make sure that the `MyData` directory is in the same directory as `main.py`. After this, you should run `python3 main.py` and it will create a txt file called `analysis.txt` which will contain the analyzed data after running the functions of `main.py` using the data from the `MyData` directory.

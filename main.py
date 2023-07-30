@@ -1,9 +1,10 @@
-##########################################
-###  Analysis on Spotify account data  ### 
-##########################################
+################################################################
+###             Analysis on Spotify account data             ### 
+###                                                          ###
+###  https://github.com/AcevedoJetter/spotify-data-analysis  ###
+################################################################
 
 import os
-import json
 import pandas as pd
 
 def get_all_data():
@@ -18,6 +19,13 @@ def get_all_data():
             df = pd.concat([df, pd.read_json(f"MyData/{file}")])
 
     return df
+
+
+def save_data_csv():
+    """
+    Saves the data in the json files to a big csv file
+    """
+    return get_all_data().to_csv("data.csv", index=False)
 
 
 def get_time_playing_songs(data):
