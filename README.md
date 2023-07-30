@@ -1,6 +1,6 @@
 # Spotify Data Analysis
 
-Repository to get an analysis of your streams since creating your account.
+Repository to get an analysis of your streams since creating your account. **This is a work in progress, more functions will be added.**
 
 # Getting the data
 
