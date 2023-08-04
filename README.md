@@ -68,15 +68,9 @@ Example of the streaming data of one song:
 
 # main.py
 
-`get_all_data()` - does not take anything as a parameter and returns a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata).
+All the functions in `main.py` have docstrings which contains the parameters of the function and it also contains what is returned by the function.
 
-`save_data_csv()` - does not take anything as a parameter and saves all the data from the json files to a big csv file.
-
-`get_time_playing_songs(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a list with four elements: `[seconds, minutes, hours, days]` rounded up to 2 decimal places.
-
-`get_different_artist(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a list with all the different artists the account has played.
-
-`get_amount_different_artist(data)` - takes in `data` as a parameter which is a pandas DataFrame with the columns being the items detailed [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata) and returns a the amount of different artists the account has played.
+Note that the columns of the pandas DataFrame returned by `get_all_data()` can be found [here](https://github.com/AcevedoJetter/spotify-data-analysis#mydata).
 
 # How to run main.py in the terminal
 
