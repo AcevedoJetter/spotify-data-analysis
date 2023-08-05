@@ -93,10 +93,21 @@ def most_streamed_song_amount(data):
     new_data = new_data.sort_values(["times_played", "master_metadata_track_name", "master_metadata_album_artist_name"], ascending=[False, True, True])
     return new_data
 
+def streamed_artist_and_amount(data):
+    """
+    Parameters:
+        data: pandas DataFrame with columns specified in the README.md
+    
+    Returns:
+        list[list, int]: list with a list of streamed artist and the amount
+    """
+    artists = list(data["master_metadata_album_artist_name"].unique())
+    return [artists, len(artists)]
+
 
 #######################################
 ### Save the analysis to a txt file ###
 #######################################
 if __name__ == "__main__":
     data = get_all_data()
-    print(most_streamed_song_time(data).to_string())
+    print(streamed_artist_and_amount(data))
