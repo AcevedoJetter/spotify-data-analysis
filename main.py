@@ -1,5 +1,5 @@
 ################################################################
-###             Analysis on Spotify account data             ### 
+###         Analysis on Spotify account extended data        ### 
 ###                                                          ###
 ###  https://github.com/AcevedoJetter/spotify-data-analysis  ###
 ################################################################
@@ -28,44 +28,37 @@ def save_data_csv():
     return get_all_data().to_csv("data.csv", index=False)
 
 
-def get_time_playing_songs(data):
+def most_streamed_artist_time(data):
     """
     Parameters:
         data: pandas DataFrame with columns specified in the README.md
     
     Returns:
-        times: list with time in seconds, minutes, hours, and days
+        new_data: pandas DataFrame with artist and decending order of time played in ms
     """
-    milliseconds_series = data["ms_played"]
-    milliseconds = milliseconds_series.sum()
-    seconds = milliseconds/1000
-    minutes = seconds/60
-    hours = minutes/60
-    days = hours/24
-
-    return [seconds.round(2), minutes.round(2), hours.round(2), days.round(2)]
+    data = data[["master_metadata_album_artist_name", "ms_played"]]
+    new_data = data.groupby(["master_metadata_album_artist_name"], 
+                                            as_index=False, 
+                                            dropna=False)["ms_played"].sum()
+    new_data = new_data.sort_values(["ms_played", "master_metadata_album_artist_name"], ascending=[False, True])
+    return new_data
 
 
-def get_different_artist(data):
+def most_streamed_artist_amount(data):
     """
     Parameters:
         data: pandas DataFrame with columns specified in the README.md
     
     Returns:
-        list: list of the different artists the account has played
+        new_data: pandas DataFrame with artist and decending order of amount of songs played
     """
-    return list(data["master_metadata_album_artist_name"].unique())
-
-
-def get_amount_different_artist(data):
-    """
-    Parameters:
-        data: pandas DataFrame with columns specified in the README.md
-    
-    Returns:
-        list: amount of different artists the account has played
-    """
-    return len(get_amount_different_artist(data))
+    data = data[["master_metadata_album_artist_name", "ms_played"]]
+    new_data = data.groupby(["master_metadata_album_artist_name"], 
+                                            as_index=False, 
+                                            dropna=False).count()
+    new_data = new_data.rename(columns={"ms_played" : "times_played"})
+    new_data = new_data.sort_values(["times_played", "master_metadata_album_artist_name"], ascending=[False, True])
+    return new_data
 
 
 #######################################
@@ -73,4 +66,4 @@ def get_amount_different_artist(data):
 #######################################
 if __name__ == "__main__":
     data = get_all_data()
-    print(get_amount_different_artist(data))
+    print(most_streamed_artist_time(data))
