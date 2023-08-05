@@ -61,9 +61,42 @@ def most_streamed_artist_amount(data):
     return new_data
 
 
+def most_streamed_song_time(data):
+    """
+    Parameters:
+        data: pandas DataFrame with columns specified in the README.md
+    
+    Returns:
+        new_data: pandas DataFrame with song, artist, and decending order of time played in ms
+    """
+    data = data[["master_metadata_track_name", "master_metadata_album_artist_name", "ms_played"]]
+    new_data = data.groupby(["master_metadata_track_name", "master_metadata_album_artist_name"], 
+                                            as_index=False, 
+                                            dropna=False)["ms_played"].sum()
+    new_data = new_data.sort_values(["ms_played", "master_metadata_track_name", "master_metadata_album_artist_name"], ascending=[False, True, True])
+    return new_data
+
+
+def most_streamed_song_amount(data):
+    """
+    Parameters:
+        data: pandas DataFrame with columns specified in the README.md
+    
+    Returns:
+        new_data: pandas DataFrame with song, artist and decending order of amount played
+    """
+    data = data[["master_metadata_track_name", "master_metadata_album_artist_name", "ms_played"]]
+    new_data = data.groupby(["master_metadata_track_name", "master_metadata_album_artist_name"], 
+                                            as_index=False, 
+                                            dropna=False).count()
+    new_data = new_data.rename(columns={"ms_played" : "times_played"})
+    new_data = new_data.sort_values(["times_played", "master_metadata_track_name", "master_metadata_album_artist_name"], ascending=[False, True, True])
+    return new_data
+
+
 #######################################
 ### Save the analysis to a txt file ###
 #######################################
 if __name__ == "__main__":
     data = get_all_data()
-    print(most_streamed_artist_time(data))
+    print(most_streamed_song_time(data).to_string())
