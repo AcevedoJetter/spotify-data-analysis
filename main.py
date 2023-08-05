@@ -93,16 +93,41 @@ def most_streamed_song_amount(data):
     new_data = new_data.sort_values(["times_played", "master_metadata_track_name", "master_metadata_album_artist_name"], ascending=[False, True, True])
     return new_data
 
-def streamed_artist_and_amount(data):
+
+def shuffle_ratio(data):
     """
     Parameters:
         data: pandas DataFrame with columns specified in the README.md
     
     Returns:
-        list[list, int]: list with a list of streamed artist and the amount
+        list: list with the percent of shuffled to non shuffled songs
     """
-    artists = list(data["master_metadata_album_artist_name"].unique())
-    return [artists, len(artists)]
+    df_shuffle = data.groupby(data["shuffle"])["shuffle"].count()
+    true = df_shuffle[True]
+    false = df_shuffle[False]
+    total = true + false
+
+    return [(true/total*100).round(2), (false/total*100).round(2)]
+
+
+def offline_ratio(data):
+    """
+    Parameters:
+        data: pandas DataFrame with columns specified in the README.md
+    
+    Returns:
+        list: list with the percent of offline to online songs
+    """
+    df_offline = data.groupby(data["offline"])["offline"].count()
+    true = df_offline[True]
+    false = df_offline[False]
+    total = true + false
+
+    return [(true/total*100).round(2), (false/total*100).round(2)]
+
+    
+
+
 
 
 #######################################
@@ -110,4 +135,4 @@ def streamed_artist_and_amount(data):
 #######################################
 if __name__ == "__main__":
     data = get_all_data()
-    print(streamed_artist_and_amount(data))
+    print(offline_ratio(data))
