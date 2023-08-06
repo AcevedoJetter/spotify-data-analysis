@@ -133,6 +133,30 @@ def most_streamed_time_by_day(data):
     return new_data
 
 
+def reason_start_end_ratio(data, reason):
+    """
+    Parameters:
+        data: pandas DataFrame with columns specified in the README.md
+    
+    Returns:
+        amounts: dictionary with the reason as key and percent of reason as value
+    """
+    if reason == "reason_start" or reason == "reason_end":
+        data = data[reason]
+        total = len(data)
+        amounts = {}
+        for i, row in data.items():
+            if row not in amounts:
+                amounts[row] = 1
+            else:
+                amounts[row] += 1
+        for key in amounts:
+            amounts[key] /= (total*1/100)
+        return amounts
+    
+    return f"In the reason parameter, you entered {reason} insted of 'reason_start' or 'reason_end'"
+
+
 #######################################
 ### Save the analysis to a txt file ###
 #######################################
@@ -142,7 +166,7 @@ if __name__ == "__main__":
     # Get the data from json files and turn it to a pandas DataFrame
     data = get_all_data()
 
-    print(most_streamed_time_by_day(data))
+    print(reason_start_end_ratio(data, "reason_end"))
 
     # Print total time to run
     print(f"Total Time in Seconds to Run File: {time.time() - start}")
