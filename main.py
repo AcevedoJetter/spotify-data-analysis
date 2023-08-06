@@ -5,6 +5,7 @@
 ################################################################
 
 import os
+import time
 import pandas as pd
 
 def get_all_data():
@@ -112,14 +113,36 @@ def shuffle_offline_ratio(data, column_name):
     
     return f"In the column_name parameter, you entered {column_name} insted of 'shuffle' or 'offline'"
 
+
+def most_streamed_time_by_day(data):
+    """
+    Parameters:
+        data: pandas DataFrame with columns specified in the README.md
     
+    Returns:
+        new_data: pandas DataFrame with days and decending order of time played in ms
+    """
+    data = data[["ts", "ms_played"]]
+    for i, row in data["ts"].items():
+        day = row.split("T")[0]
+        data.loc[i, "ts"] = day
 
-
+    new_data = data.groupby(["ts"], as_index=False, dropna=False)["ms_played"].sum()
+    new_data = new_data.sort_values(["ms_played", "ts"], ascending=[False, True])
+    
+    return new_data
 
 
 #######################################
 ### Save the analysis to a txt file ###
 #######################################
 if __name__ == "__main__":
+    start = time.time()
+
+    # Get the data from json files and turn it to a pandas DataFrame
     data = get_all_data()
-    print(shuffle_offline_ratio(data, "offline"))
+
+    print(most_streamed_time_by_day(data))
+
+    # Print total time to run
+    print(f"Total Time in Seconds to Run File: {time.time() - start}")
