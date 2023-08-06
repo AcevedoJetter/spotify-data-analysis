@@ -94,36 +94,23 @@ def most_streamed_song_amount(data):
     return new_data
 
 
-def shuffle_ratio(data):
+def shuffle_offline_ratio(data, column_name):
     """
     Parameters:
         data: pandas DataFrame with columns specified in the README.md
+        column_name: should be either of 'shuffle' or 'offline'
     
     Returns:
-        list: list with the percent of shuffled to non shuffled songs
+        list: list with the percent of the string in column_name to non string of column_name songs
     """
-    df_shuffle = data.groupby(data["shuffle"])["shuffle"].count()
-    true = df_shuffle[True]
-    false = df_shuffle[False]
-    total = true + false
-
-    return [(true/total*100).round(2), (false/total*100).round(2)]
-
-
-def offline_ratio(data):
-    """
-    Parameters:
-        data: pandas DataFrame with columns specified in the README.md
+    if column_name == "shuffle" or column_name == "offline":
+        df = data.groupby(data[column_name])[column_name].count()
+        true = df[True]
+        false = df[False]
+        total = true + false
+        return [(true/total*100).round(2), (false/total*100).round(2)]
     
-    Returns:
-        list: list with the percent of offline to online songs
-    """
-    df_offline = data.groupby(data["offline"])["offline"].count()
-    true = df_offline[True]
-    false = df_offline[False]
-    total = true + false
-
-    return [(true/total*100).round(2), (false/total*100).round(2)]
+    return f"In the column_name parameter, you entered {column_name} insted of 'shuffle' or 'offline'"
 
     
 
@@ -135,4 +122,4 @@ def offline_ratio(data):
 #######################################
 if __name__ == "__main__":
     data = get_all_data()
-    print(offline_ratio(data))
+    print(shuffle_offline_ratio(data, "offline"))
