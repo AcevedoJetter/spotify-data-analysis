@@ -157,6 +157,25 @@ def reason_start_end_ratio(data, reason):
     return f"In the reason parameter, you entered {reason} insted of 'reason_start' or 'reason_end'"
 
 
+def create_and_write_txt(data):
+    """
+    Parameters:
+        data: pandas DataFrame with columns specified in the README.md
+    
+    Returns:
+        string: will say that the txt file has been created
+    """
+    file = open("analysis.txt", "w")
+
+    file.writelines([
+        "SPOTIFY DATA ANALYSIS",
+        "",
+        "", # ADD THE LINE OF EVERY FUNCTION HERE
+    ])
+
+    return f"The file analiysis.txt has been created and saved in the following directory: {os.getcwd()}\n"
+
+
 #######################################
 ### Save the analysis to a txt file ###
 #######################################
@@ -166,7 +185,7 @@ if __name__ == "__main__":
     # Get the data from json files and turn it to a pandas DataFrame
     data = get_all_data()
 
-    print(reason_start_end_ratio(data, "reason_end"))
+    print(create_and_write_txt(data, "reason_end"))
 
     # Print total time to run
     print(f"Total Time in Seconds to Run File: {time.time() - start}")
