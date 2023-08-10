@@ -29,6 +29,24 @@ def save_data_csv():
     return get_all_data().to_csv("data.csv", index=False)
 
 
+def total_time(data):
+    """
+    Parameters:
+        data: pandas DataFrame with columns specified in the README.md
+    
+    Returns:
+        times: list with time in seconds, minutes, hours, and days
+    """
+    milliseconds_series = data["ms_played"]
+    milliseconds = milliseconds_series.sum()
+    seconds = milliseconds/1000
+    minutes = seconds/60
+    hours = minutes/60
+    days = hours/24
+
+    return [seconds.round(2), minutes.round(2), hours.round(2), days.round(2)]
+
+
 def most_streamed_artist_time(data):
     """
     Parameters:
@@ -170,7 +188,7 @@ def create_and_write_txt(data):
     file.writelines([
         "SPOTIFY DATA ANALYSIS",
         "",
-        "", # ADD THE LINE OF EVERY FUNCTION HERE
+        f"Most streamed artist by time", # ADD THE LINE OF EVERY FUNCTION HERE
     ])
 
     return f"The file analiysis.txt has been created and saved in the following directory: {os.getcwd()}\n"
@@ -185,7 +203,8 @@ if __name__ == "__main__":
     # Get the data from json files and turn it to a pandas DataFrame
     data = get_all_data()
 
-    print(create_and_write_txt(data, "reason_end"))
+    # Save the analysis to a txt file
+    print(total_time(data))
 
     # Print total time to run
     print(f"Total Time in Seconds to Run File: {time.time() - start}")
