@@ -186,12 +186,14 @@ def create_and_write_txt(data):
     file = open("analysis.txt", "w")
 
     file.writelines([
-        "SPOTIFY DATA ANALYSIS",
-        "",
-        f"Most streamed artist by time", # ADD THE LINE OF EVERY FUNCTION HERE
+        "SPOTIFY DATA ANALYSIS\n\n",
+        f"Total Time Listened: {total_time(data)[0]} seconds = {total_time(data)[1]} minutes = {total_time(data)[2]} hours = {total_time(data)[3]} days\n\n",
+        f""
     ])
 
-    return f"The file analiysis.txt has been created and saved in the following directory: {os.getcwd()}\n"
+    file.close()
+
+    return f"\nThe file analiysis.txt has been created and saved in the following directory: {os.getcwd()}\n"
 
 
 #######################################
@@ -204,7 +206,7 @@ if __name__ == "__main__":
     data = get_all_data()
 
     # Save the analysis to a txt file
-    print(total_time(data))
+    print(create_and_write_txt(data))
 
     # Print total time to run
-    print(f"Total Time in Seconds to Run File: {time.time() - start}")
+    print(f"Total Time in Seconds to Run File: {time.time() - start}\n")
