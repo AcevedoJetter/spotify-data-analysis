@@ -78,7 +78,7 @@ First, make sure that the `MyData` directory is in the same directory as `main.p
 
 # analysis.txt
 
-This file will contain the following:
+This file contains the following analysis of the data from the `MyData` directory:
 
 - Total Time Listened
 - Most Streamed Artist by time
