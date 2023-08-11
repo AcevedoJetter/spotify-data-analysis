@@ -47,7 +47,7 @@ def total_time(data):
     return [seconds.round(2), minutes.round(2), hours.round(2), days.round(2)]
 
 
-def most_streamed_artist_time(data):
+def most_streamed_artist_time(data, top=None):
     """
     Parameters:
         data: pandas DataFrame with columns specified in the README.md
@@ -60,10 +60,13 @@ def most_streamed_artist_time(data):
                                             as_index=False, 
                                             dropna=False)["ms_played"].sum()
     new_data = new_data.sort_values(["ms_played", "master_metadata_album_artist_name"], ascending=[False, True])
+
+    if top:
+        return new_data.head(top)
     return new_data
 
 
-def most_streamed_artist_amount(data):
+def most_streamed_artist_amount(data, top=None):
     """
     Parameters:
         data: pandas DataFrame with columns specified in the README.md
@@ -77,10 +80,13 @@ def most_streamed_artist_amount(data):
                                             dropna=False).count()
     new_data = new_data.rename(columns={"ms_played" : "times_played"})
     new_data = new_data.sort_values(["times_played", "master_metadata_album_artist_name"], ascending=[False, True])
+    
+    if top:
+        return new_data.head(top)
     return new_data
 
 
-def most_streamed_song_time(data):
+def most_streamed_song_time(data, top=None):
     """
     Parameters:
         data: pandas DataFrame with columns specified in the README.md
@@ -93,10 +99,13 @@ def most_streamed_song_time(data):
                                             as_index=False, 
                                             dropna=False)["ms_played"].sum()
     new_data = new_data.sort_values(["ms_played", "master_metadata_track_name", "master_metadata_album_artist_name"], ascending=[False, True, True])
+    
+    if top:
+        return new_data.head(top)
     return new_data
 
 
-def most_streamed_song_amount(data):
+def most_streamed_song_amount(data, top=None):
     """
     Parameters:
         data: pandas DataFrame with columns specified in the README.md
@@ -110,6 +119,9 @@ def most_streamed_song_amount(data):
                                             dropna=False).count()
     new_data = new_data.rename(columns={"ms_played" : "times_played"})
     new_data = new_data.sort_values(["times_played", "master_metadata_track_name", "master_metadata_album_artist_name"], ascending=[False, True, True])
+    
+    if top:
+        return new_data.head(top)
     return new_data
 
 
@@ -185,10 +197,31 @@ def create_and_write_txt(data):
     """
     file = open("analysis.txt", "w")
 
+    total_time_account = total_time(data)
+
+    def get_top_five(data, func, top=5):
+        string = ""
+        info = func(data, top)
+        columns = list(info.columns)
+        for i in range(top):
+            if func == most_streamed_artist_time:
+                string += f"\t{i+1}. {info.iloc[i][columns[0]]} for a total time of {(info.iloc[i][columns[1]]/3600000).round(2)} hours\n"
+            elif func == most_streamed_artist_amount:
+                string += f"\t{i+1}. {info.iloc[i][columns[0]]} for a total amount of {info.iloc[i][columns[1]]} songs\n"
+            elif func == most_streamed_song_time:
+                string += f"\t{i+1}. {info.iloc[i][columns[0]]} by {info.iloc[i][columns[1]]} for a total time of {(info.iloc[i][columns[2]]/3600000).round(2)} hours\n"
+            elif func == most_streamed_song_amount:
+                string += f"\t{i+1}. {info.iloc[i][columns[0]]} by {info.iloc[i][columns[1]]} for a total amount of {info.iloc[i][columns[2]]} streams\n"
+        return string
+        
+
     file.writelines([
         "SPOTIFY DATA ANALYSIS\n\n",
-        f"Total Time Listened: {total_time(data)[0]} seconds = {total_time(data)[1]} minutes = {total_time(data)[2]} hours = {total_time(data)[3]} days\n\n",
-        f""
+        f"Total Time Listened: {total_time_account[0]} seconds = {total_time_account[1]} minutes = {total_time_account[2]} hours = {total_time_account[3]} days\n\n",
+        f"Most Streamed Artist by time:\n{get_top_five(data, most_streamed_artist_time)}\n",
+        f"Most Streamed Artist by songs played:\n{get_top_five(data, most_streamed_artist_amount)}\n",
+        f"Most Streamed Songs by time played:\n{get_top_five(data, most_streamed_song_time)}\n",
+        f"Most Streamed Songs by amount of times played:\n{get_top_five(data, most_streamed_song_amount)}\n",
     ])
 
     file.close()
