@@ -78,4 +78,15 @@ First, make sure that the `MyData` directory is in the same directory as `main.p
 
 # analysis.txt
 
-This file will contain the following: `Total Time Listened, Most Streamed Artist by time, Most Streamed Artist by songs played, Most Streamed Songs by time played, Most Streamed Songs by amount of times played, Percent of songs on shuffle, Percent of songs played offline,Percent of songs online, Reasons a song started, Reasons a song ended`
+This file will contain the following:
+
+- Total Time Listened
+- Most Streamed Artist by time
+- Most Streamed Artist by songs played
+- Most Streamed Songs by time played
+- Most Streamed Songs by amount of times played
+- Percent of songs on shuffle
+- Percent of songs played offline
+- Percent of songs online
+- Reasons a song started
+- Reasons a song ended
