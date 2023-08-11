@@ -235,7 +235,7 @@ def create_and_write_txt(data):
         f"Percent of songs on shuffle: {shuffle[0]}\nPercent of songs not on shuffle: {shuffle[1]}\n\n",
         f"Percent of songs played offline: {offline[0]}\nPercent of songs online: {offline[1]}\n\n",
         f"Reasons a song started:{reason_start_end_to_string(data, 'reason_start')}\n\n"
-        f"Reasons a song started:{reason_start_end_to_string(data, 'reason_end')}"
+        f"Reasons a song ended:{reason_start_end_to_string(data, 'reason_end')}"
     ])
 
     file.close()
