@@ -4,7 +4,7 @@ Repository to get an analysis of your streams since creating your account. **Thi
 
 # Getting the data
 
-The folder that you have should contain your entire streaming history data for the life of your account. This can be obtained by pressing the `Request data` button in [this website](https://www.spotify.com/us/account/privacy/) if you are logged in to your account.
+The folder that you have should contain your entire streaming history data for the life of your account. This can be obtained by pressing the `Request data` button in [this website](https://www.spotify.com/us/account/privacy/) if you are logged in to your account. Make sure to select the field that says `Select Extended streaming history`.
 
 After some weeks, you will get an email with the extended streaming history. After downloading it, you will have a zip file called `my_spotify_data.zip` and when opened the directory is `MyData`.
 
@@ -75,3 +75,7 @@ Note that the columns of the pandas DataFrame returned by `get_all_data()` can b
 # How to run main.py in the terminal
 
 First, make sure that the `MyData` directory is in the same directory as `main.py`. After this, you should run `python3 main.py` and it will create a txt file called `analysis.txt` which will contain the analyzed data after running the functions of `main.py` using the data from the `MyData` directory.
+
+# analysis.txt
+
+This file will contain the following: `Total Time Listened, Most Streamed Artist by time, Most Streamed Artist by songs played, Most Streamed Songs by time played, Most Streamed Songs by amount of times played, Percent of songs on shuffle, Percent of songs played offline,Percent of songs online, Reasons a song started, Reasons a song ended`
