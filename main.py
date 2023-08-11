@@ -213,7 +213,17 @@ def create_and_write_txt(data):
             elif func == most_streamed_song_amount:
                 string += f"\t{i+1}. {info.iloc[i][columns[0]]} by {info.iloc[i][columns[1]]} for a total amount of {info.iloc[i][columns[2]]} streams\n"
         return string
-        
+    
+    shuffle = shuffle_offline_ratio(data, "shuffle")
+    offline = shuffle_offline_ratio(data, "offline")
+
+    def reason_start_end_to_string(data, reason):
+        string = ""
+        info = reason_start_end_ratio(data, reason)
+        info_sorted = dict(sorted(info.items(), key=lambda x:x[1])[::-1])
+        for reason in info_sorted:
+            string += f"\n\t{reason}: {round(info[reason], 2)}"
+        return string
 
     file.writelines([
         "SPOTIFY DATA ANALYSIS\n\n",
@@ -222,6 +232,10 @@ def create_and_write_txt(data):
         f"Most Streamed Artist by songs played:\n{get_top_five(data, most_streamed_artist_amount)}\n",
         f"Most Streamed Songs by time played:\n{get_top_five(data, most_streamed_song_time)}\n",
         f"Most Streamed Songs by amount of times played:\n{get_top_five(data, most_streamed_song_amount)}\n",
+        f"Percent of songs on shuffle: {shuffle[0]}\nPercent of songs not on shuffle: {shuffle[1]}\n\n",
+        f"Percent of songs played offline: {offline[0]}\nPercent of songs online: {offline[1]}\n\n",
+        f"Reasons a song started:{reason_start_end_to_string(data, 'reason_start')}\n\n"
+        f"Reasons a song started:{reason_start_end_to_string(data, 'reason_end')}"
     ])
 
     file.close()
