@@ -85,8 +85,7 @@ This file contains the following analysis of the data from the `MyData` director
 - Most Streamed Artist by songs played
 - Most Streamed Songs by time played
 - Most Streamed Songs by amount of times played
-- Percent of songs on shuffle
-- Percent of songs played offline
-- Percent of songs online
-- Reasons a song started
-- Reasons a song ended
+- Percent of songs on shuffle vs not on shuffle
+- Percent of songs played offline vs played online
+- Reasons a song started with their respective percentage
+- Reasons a song ended with their respective percentage
