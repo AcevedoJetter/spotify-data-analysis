@@ -227,15 +227,25 @@ def create_and_write_txt(data):
 
     file.writelines([
         "SPOTIFY DATA ANALYSIS\n\n",
+        "-----------------------------------------------------------------------------------------------------\n\n",
         f"Total Time Listened: {total_time_account[0]} seconds = {total_time_account[1]} minutes = {total_time_account[2]} hours = {total_time_account[3]} days\n\n",
+        "-----------------------------------------------------------------------------------------------------\n\n",
         f"Most Streamed Artist by time:\n{get_top_five(data, most_streamed_artist_time)}\n",
+        "-----------------------------------------------------------------------------------------------------\n\n",
         f"Most Streamed Artist by songs played:\n{get_top_five(data, most_streamed_artist_amount)}\n",
+        "-----------------------------------------------------------------------------------------------------\n\n",
         f"Most Streamed Songs by time played:\n{get_top_five(data, most_streamed_song_time)}\n",
+        "-----------------------------------------------------------------------------------------------------\n\n",
         f"Most Streamed Songs by amount of times played:\n{get_top_five(data, most_streamed_song_amount)}\n",
+        "-----------------------------------------------------------------------------------------------------\n\n",
         f"Percent of songs on shuffle: {shuffle[0]}\nPercent of songs not on shuffle: {shuffle[1]}\n\n",
+        "-----------------------------------------------------------------------------------------------------\n\n",
         f"Percent of songs played offline: {offline[0]}\nPercent of songs online: {offline[1]}\n\n",
+        "-----------------------------------------------------------------------------------------------------\n\n",
         f"Reasons a song started:{reason_start_end_to_string(data, 'reason_start')}\n\n"
-        f"Reasons a song ended:{reason_start_end_to_string(data, 'reason_end')}"
+        "-----------------------------------------------------------------------------------------------------\n\n",
+        f"Reasons a song ended:{reason_start_end_to_string(data, 'reason_end')}\n\n"
+        "-----------------------------------------------------------------------------------------------------",
     ])
 
     file.close()
